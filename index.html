@@ -1,0 +1,283 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Algoritmo de recomendación de películas (Tipo Netflix)">
+    <meta name="author" content="youngiRobot">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflis | Ofisial</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/brython@3/brython.min.js">
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/brython@3/brython_stdlib.js">
+
+
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="icon" href="img/netflis_logo_icon.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+</head>
+
+<body onload="brython()">
+
+    <!-- Just an image -->
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/netflis_logo.png" width="200" height="80" alt="">
+        </a>
+    </nav>
+
+    <script type="text/python">
+        from browser import document from browser.widgets.dialog import InfoDialog def click(ev): InfoDialog("Pepin", f"Hello, {document['zone'].value} !") # bind event 'click' on button to function echo document["echo"].bind("click", click)</script>
+    <div class="botones">
+        <h2>TODAS LAS PELÍCULAS Y SERIES <br> QUE DESEES, Y MUCHO MÁS.</h2>
+        <h4>ELIGE UNA PELICULA</h4>
+        <!--<input id="zone">
+    <button id="echo" type="button" class="btn btn-danger">Click!</button>-->
+
+        <div class="input-group mx-auto">
+
+            <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                <option selected>Elige una película...</option>
+                <option value="1">Toy Storie (1995) </option>
+                <option value="2">Star Wars (1977)</option>
+                <option value="3">Duck Soup (1933)</option>
+                <option value="4">Alice in Wordenland (1951)</option>
+            </select>
+
+            <div class="input-group-append">
+                <button class="btn btn-danger" type="button" onclick="mostrarSimilares()">Dale</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="carouselExampleIndicators" class="carousel slide mt-5" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+        </ol>
+        <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+                <div class="card text-white bg-dark mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card1">¿Estás preparad@?</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card text-white bg-secondary mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card2">¿Qué quieres ver hoy?</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card text-white bg-dark mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card3">@youngiRobot</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card text-white bg-secondary mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card4">Trabajo Investigación <br> IA</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card text-white bg-dark mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card5">Algoritmo Recomendación</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card text-white bg-secondary mx-auto" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title p-4" id="card6">¡Empecemos!</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div id="miDiv"></div>
+
+
+    <p class="text-center mt-4 text-light">Made with
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart text-danger" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+        </svg> by YoungiRobot
+    </p>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+           
+        function mostrarSimilares() {
+            var x = document.getElementById('inputGroupSelect04').value;
+            //console.log(x)
+            if (x == 1) {
+                toy_Story();
+            } else if (x == 2) {
+                starWars();
+            } else if (x == 3) {
+                duckSoup();
+            } else if (x == 4) {
+                alice();
+            }
+        }
+
+        function toy_Story() {
+
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", "toy_story.txt", false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        console.log(allText);
+                        let t = allText.split("\n")
+
+                        var card1 = document.getElementById('card1');
+                        card1.innerHTML = t[0]
+                        var card2 = document.getElementById('card2');
+                        card2.innerHTML = t[1]
+                        var card3 = document.getElementById('card3');
+                        card3.innerHTML = t[2]
+                        var card4 = document.getElementById('card4');
+                        card4.innerHTML = t[3]
+                        var card5 = document.getElementById('card5');
+                        card5.innerHTML = t[4]
+                        var card6 = document.getElementById('card6');
+                        card6.innerHTML = t[5]
+
+                        console.log(t)
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+
+        function starWars() {
+
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", "star_wars.txt", false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        let t = allText.split("\n")
+
+                        var card1 = document.getElementById('card1');
+                        card1.innerHTML = t[0]
+                        var card2 = document.getElementById('card2');
+                        card2.innerHTML = t[1]
+                        var card3 = document.getElementById('card3');
+                        card3.innerHTML = t[2]
+                        var card4 = document.getElementById('card4');
+                        card4.innerHTML = t[3]
+                        var card5 = document.getElementById('card5');
+                        card5.innerHTML = t[4]
+                        var card6 = document.getElementById('card6');
+                        card6.innerHTML = t[5]
+
+                        console.log(t)
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+
+        function duckSoup() {
+
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", "duckSoup.txt", false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        console.log(allText);
+                        let t = allText.split("\n")
+
+                        var card1 = document.getElementById('card1');
+                        card1.innerHTML = t[0]
+                        var card2 = document.getElementById('card2');
+                        card2.innerHTML = t[1]
+                        var card3 = document.getElementById('card3');
+                        card3.innerHTML = t[2]
+                        var card4 = document.getElementById('card4');
+                        card4.innerHTML = t[3]
+                        var card5 = document.getElementById('card5');
+                        card5.innerHTML = t[4]
+                        var card6 = document.getElementById('card6');
+                        card6.innerHTML = t[5]
+
+                        console.log(t)
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+
+        function alice() {
+
+            var rawFile = new XMLHttpRequest();
+            rawFile.open("GET", "alice.txt", false);
+            rawFile.onreadystatechange = function() {
+                if (rawFile.readyState === 4) {
+                    if (rawFile.status === 200 || rawFile.status == 0) {
+                        var allText = rawFile.responseText;
+                        console.log(allText);
+                        let t = allText.split("\n")
+
+                        var card1 = document.getElementById('card1');
+                        card1.innerHTML = t[0]
+                        var card2 = document.getElementById('card2');
+                        card2.innerHTML = t[1]
+                        var card3 = document.getElementById('card3');
+                        card3.innerHTML = t[2]
+                        var card4 = document.getElementById('card4');
+                        card4.innerHTML = t[3]
+                        var card5 = document.getElementById('card5');
+                        card5.innerHTML = t[4]
+                        var card6 = document.getElementById('card6');
+                        card6.innerHTML = t[5]
+
+                        console.log(t)
+                    }
+                }
+            }
+            rawFile.send(null);
+        }
+
+    </script>
+</body>
+
+</html>

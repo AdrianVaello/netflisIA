@@ -1,0 +1,45 @@
+body{
+    background-image: url("../img/netflix_codigos.jpg");
+    font-family: "Open Sans", sans-serif;
+}
+
+nav a img{
+    text-shadow: 2px 1px 4px #000000;
+}
+
+.botones{
+    width: 100vw;
+    text-align: center;
+    margin-top: 200px;
+}
+
+.botones h2{
+    font-size: 40px;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.botones h4{
+    font-size: 20px;
+    color: #fff;
+    opacity: .8;
+}
+
+.botones .input-group{
+    text-align: center;
+    width: 60%;
+    margin-top: 25px;
+}
+
+.btn-danger{
+    background-color: red !important;
+}
+
+.btn-danger:hover{
+    background-color: firebrick !important;
+}
+
+.card{
+    text-shadow: 2px 1px 4px #000000;
+}
+
